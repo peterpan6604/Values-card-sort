@@ -1,40 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Personal Values Card Sort</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Values Card Sort</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .category {
+            width: 30%;
+            min-height: 200px;
+            border: 2px dashed #000;
+            padding: 10px;
+        }
+        .card {
+            background-color: lightblue;
+            padding: 10px;
+            margin: 5px;
+            cursor: grab;
+            border: 1px solid #000;
+        }
+    </style>
 </head>
 <body>
-    <div id="app">
-        <div class="header">
-            <h1>Personal Values Card Sort</h1>
-            <p>Sort your values into different categories</p>
-            <button id="resetButton">Reset All Cards</button>
+    <h1>Values Card Sort</h1>
+    <p>Drag and drop the cards into the relevant category.</p>
+    <div class="container">
+        <div class="category" id="important" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h2>Important</h2>
         </div>
-        
-        <div class="categories">
-            <div class="category" id="important">
-                <h2>IMPORTANT TO ME</h2>
-                <div class="card-container" id="important-container"></div>
-            </div>
-            
-            <div class="category" id="veryImportant">
-                <h2>VERY IMPORTANT TO ME</h2>
-                <div class="card-container" id="veryImportant-container"></div>
-            </div>
-            
-            <div class="category" id="notImportant">
-                <h2>NOT IMPORTANT TO ME</h2>
-                <div class="card-container" id="notImportant-container"></div>
-            </div>
+        <div class="category" id="very-important" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h2>Very Important</h2>
         </div>
-        
-        <div class="unsorted">
-            <h2>Unsorted Values</h2>
-            <div class="card-grid" id="unsorted-container"></div>
+        <div class="category" id="not-important" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h2>Not Important</h2>
         </div>
     </div>
-    
-    <script src="script.js"></script>
+    <div>
+        <h2>Values</h2>
+        <div class="card" draggable="true" ondragstart="drag(event)" id="card1">Integrity</div>
+        <div class="card" draggable="true" ondragstart="drag(event)" id="card2">Respect</div>
+        <div class="card" draggable="true" ondragstart="drag(event)" id="card3">Innovation</div>
+    </div>
+    <script>
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+        function drop(event) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("text");
+            event.target.appendChild(document.getElementById(data));
+        }
+    </script>
 </body>
 </html>
