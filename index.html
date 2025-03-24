@@ -31,7 +31,7 @@
 </head>
 <body>
     <h1>Values Card Sort</h1>
-    <p>Drag and drop the cards into the relevant category.</p>
+    <p>Drag and drop the cards into the relevant category. Once placed, they cannot be moved.</p>
     <div class="container">
         <div class="category" id="important" ondrop="drop(event)" ondragover="allowDrop(event)">
             <h2>Important</h2>
@@ -45,9 +45,20 @@
     </div>
     <div>
         <h2>Values</h2>
-        <div class="card" draggable="true" ondragstart="drag(event)" id="card1">Integrity</div>
-        <div class="card" draggable="true" ondragstart="drag(event)" id="card2">Respect</div>
-        <div class="card" draggable="true" ondragstart="drag(event)" id="card3">Innovation</div>
+        <script>
+            const values = [
+                "Acceptance", "Achievement", "Attractiveness", "Authority", "Accuracy", "Beauty", "Caring", "Change", "Compassion", "Commitment", 
+                "Contribution", "Cooperation", "Comfort", "Creativity", "Dependability", "Ecology", "Fame", "Faithfulness", "Family", "Fitness", 
+                "Forgiveness", "Friendship", "Generosity", "Growth", "God’s Will", "Health", "Helpfulness", "Genuineness", "Hope", "Humility", 
+                "Independence", "Intimacy", "Inner Peace", "Justice", "Knowledge", "Industry", "Loved", "Loving", "Mindfulness", "Non-Conformity", 
+                "Monogamy", "Openness", "Moderation", "Passion", "Pleasure", "Power", "Realism", "Rationality", "Responsibility", "Risk", "Purpose", 
+                "Safety", "Self-Acceptance", "Self-Esteem", "Sexuality", "Service", "Simplicity", "Solitude", "Self-Knowledge", "Stability", "Tolerance", 
+                "Virtue", "World Peace", "Spirituality", "Tradition", "Wealth"
+            ];
+            values.forEach((value, index) => {
+                document.write(`<div class="card" draggable="true" ondragstart="drag(event)" id="card${index}">${value}</div>`);
+            });
+        </script>
     </div>
     <script>
         function allowDrop(event) {
@@ -59,7 +70,11 @@
         function drop(event) {
             event.preventDefault();
             var data = event.dataTransfer.getData("text");
-            event.target.appendChild(document.getElementById(data));
+            var draggedElement = document.getElementById(data);
+            if (!event.target.classList.contains("category")) return;
+            event.target.appendChild(draggedElement);
+            draggedElement.removeAttribute("draggable");
+            draggedElement.style.cursor = "default";
         }
     </script>
 </body>
