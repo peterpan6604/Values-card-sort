@@ -1,16 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Values Card Sort</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Values Card Sort</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .header {
+            background-color: #a7f3d0;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .value-card {
+            background-color: #d1fae5;
+            border: 1px solid #10b981;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            width: 200px;
+        }
+    </style>
 </head>
 <body>
-    <div id="root"></div>
-    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <script type="text/babel" src="script.js"></script>
+    <div class="header">
+        <h1>Personal Values Card Sort</h1>
+        <p>Simple test version</p>
+    </div>
+    
+    <div class="value-card">
+        <h3>ACCEPTANCE</h3>
+        <p>to be accepted as I am</p>
+    </div>
+    
+    <div class="value-card">
+        <h3>ADVENTURE</h3>
+        <p>to have new and exciting experiences</p>
+    </div>
 </body>
 </html>
