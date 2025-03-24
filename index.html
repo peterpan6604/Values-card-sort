@@ -1,80 +1,246 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Values Card Sort</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
             text-align: center;
+        }
+        .instructions {
+            text-align: center;
+            margin-bottom: 20px;
         }
         .container {
             display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
+            justify-content: space-between;
+            margin-bottom: 30px;
         }
         .category {
-            width: 30%;
+            width: 32%;
             min-height: 200px;
             border: 2px dashed #000;
             padding: 10px;
+            box-sizing: border-box;
         }
-        .card {
-            background-color: lightblue;
+        .category-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .values-container {
+            margin-top: 20px;
+        }
+        .value {
+            background-color: #a8d5e5;
             padding: 10px;
-            margin: 5px;
-            cursor: grab;
-            border: 1px solid #000;
+            margin: 5px 0;
+            border: 1px solid #444;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .value:hover {
+            background-color: #7fc6e2;
+        }
+        .button-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 0 10px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
     <h1>Values Card Sort</h1>
-    <p>Drag and drop the cards into the relevant category. Once placed, they cannot be moved.</p>
+    <div class="instructions">
+        <p>Drag and drop the values into the categories below. You can change their placement at any time.</p>
+    </div>
+    
+    <div class="button-container">
+        <button id="saveButton">Save Choices</button>
+        <button id="loadButton">Load Saved Choices</button>
+        <button id="resetButton">Reset All</button>
+    </div>
+    
     <div class="container">
         <div class="category" id="important" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <h2>Important</h2>
+            <div class="category-title">Important</div>
         </div>
-        <div class="category" id="very-important" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <h2>Very Important</h2>
+        <div class="category" id="veryImportant" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="category-title">Very Important</div>
         </div>
-        <div class="category" id="not-important" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <h2>Not Important</h2>
+        <div class="category" id="notImportant" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="category-title">Not Important</div>
         </div>
     </div>
-    <div>
-        <h2>Values</h2>
-        <script>
-            const values = [
-                "Acceptance", "Achievement", "Attractiveness", "Authority", "Accuracy", "Beauty", "Caring", "Change", "Compassion", "Commitment", 
-                "Contribution", "Cooperation", "Comfort", "Creativity", "Dependability", "Ecology", "Fame", "Faithfulness", "Family", "Fitness", 
-                "Forgiveness", "Friendship", "Generosity", "Growth", "God’s Will", "Health", "Helpfulness", "Genuineness", "Hope", "Humility", 
-                "Independence", "Intimacy", "Inner Peace", "Justice", "Knowledge", "Industry", "Loved", "Loving", "Mindfulness", "Non-Conformity", 
-                "Monogamy", "Openness", "Moderation", "Passion", "Pleasure", "Power", "Realism", "Rationality", "Responsibility", "Risk", "Purpose", 
-                "Safety", "Self-Acceptance", "Self-Esteem", "Sexuality", "Service", "Simplicity", "Solitude", "Self-Knowledge", "Stability", "Tolerance", 
-                "Virtue", "World Peace", "Spirituality", "Tradition", "Wealth"
-            ];
-            values.forEach((value, index) => {
-                document.write(`<div class="card" draggable="true" ondragstart="drag(event)" id="card${index}">${value}</div>`);
-            });
-        </script>
+    
+    <h2 style="text-align: center;">Values</h2>
+    <div class="values-container" id="valuesContainer" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <!-- Values will be added here with JavaScript -->
     </div>
+    
     <script>
-        function allowDrop(event) {
-            event.preventDefault();
+        // List of all values
+        const allValues = [
+            "Acceptance", "Achievement", "Attractiveness", "Authority", "Accuracy", "Beauty",
+            "Caring", "Change", "Compassion", "Adventure", "Autonomy", "Challenge", 
+            "Comfort", "Commitment", "Contribution", "Cooperation", "Courtesy", "Creativity",
+            "Dependability", "Duty", "Ecology", "Excitement", "Faithfulness", "Fame",
+            "Family", "Fitness", "Flexibility", "Forgiveness", "Friendship", "Fun",
+            "Generosity", "Genuineness", "God's Will", "Growth", "Health", "Helpfulness",
+            "Honesty", "Hope", "Humility", "Humor", "Independence", "Industry",
+            "Inner Peace", "Intimacy", "Justice", "Knowledge", "Leisure", "Loved",
+            "Loving", "Mastery", "Mindfulness", "Moderation", "Monogamy", "Non-Conformity",
+            "Nurturance", "Openness", "Order", "Passion", "Pleasure", "Popularity",
+            "Power", "Purpose", "Rationality", "Realism", "Responsibility", "Risk",
+            "Romance", "Safety", "Self-Acceptance", "Self-Control", "Self-Esteem", "Self-Knowledge",
+            "Service", "Sexuality", "Simplicity", "Solitude", "Spirituality", "Stability",
+            "Tolerance", "Tradition", "Virtue", "Wealth", "World Peace"
+        ];
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeValues();
+            
+            // Add event listeners to buttons
+            document.getElementById("saveButton").addEventListener("click", saveChoices);
+            document.getElementById("loadButton").addEventListener("click", loadChoices);
+            document.getElementById("resetButton").addEventListener("click", resetAll);
+        });
+        
+        // Create value elements and add them to the values container
+        function initializeValues() {
+            const valuesContainer = document.getElementById("valuesContainer");
+            valuesContainer.innerHTML = ""; // Clear existing values
+            
+            allValues.forEach((value, index) => {
+                const valueElement = document.createElement("div");
+                valueElement.className = "value";
+                valueElement.textContent = value;
+                valueElement.id = "value-" + index;
+                valueElement.draggable = true;
+                valueElement.addEventListener("dragstart", drag);
+                
+                valuesContainer.appendChild(valueElement);
+            });
         }
-        function drag(event) {
-            event.dataTransfer.setData("text", event.target.id);
+        
+        // Drag and drop functions
+        function allowDrop(ev) {
+            ev.preventDefault();
         }
-        function drop(event) {
-            event.preventDefault();
-            var data = event.dataTransfer.getData("text");
-            var draggedElement = document.getElementById(data);
-            if (!event.target.classList.contains("category")) return;
-            event.target.appendChild(draggedElement);
-            draggedElement.removeAttribute("draggable");
-            draggedElement.style.cursor = "default";
+        
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+        
+        function drop(ev) {
+            ev.preventDefault();
+            const data = ev.dataTransfer.getData("text");
+            const draggedElement = document.getElementById(data);
+            
+            // Make sure we're not dropping a category title
+            if (!draggedElement.classList.contains("category-title")) {
+                ev.target.appendChild(draggedElement);
+            }
+            
+            // If we're dropping on a value or category title, append to its parent instead
+            if (ev.target.classList.contains("value") || ev.target.classList.contains("category-title")) {
+                ev.target.parentNode.appendChild(draggedElement);
+            }
+        }
+        
+        // Save the current state to localStorage
+        function saveChoices() {
+            const important = getValuesInCategory("important");
+            const veryImportant = getValuesInCategory("veryImportant");
+            const notImportant = getValuesInCategory("notImportant");
+            
+            const savedState = {
+                important: important,
+                veryImportant: veryImportant,
+                notImportant: notImportant,
+                timestamp: new Date().toLocaleString()
+            };
+            
+            localStorage.setItem("valueCardSort", JSON.stringify(savedState));
+            alert("Your choices have been saved!");
+        }
+        
+        // Get array of values in a category
+        function getValuesInCategory(categoryId) {
+            const categoryElement = document.getElementById(categoryId);
+            const valueElements = categoryElement.querySelectorAll(".value");
+            
+            return Array.from(valueElements).map(el => el.textContent);
+        }
+        
+        // Load saved choices from localStorage
+        function loadChoices() {
+            const savedState = localStorage.getItem("valueCardSort");
+            
+            if (!savedState) {
+                alert("No saved choices found!");
+                return;
+            }
+            
+            const state = JSON.parse(savedState);
+            
+            // Reset first to clear categories
+            resetCategories();
+            
+            // Place values in their saved categories
+            placeValuesInCategory(state.important, "important");
+            placeValuesInCategory(state.veryImportant, "veryImportant");
+            placeValuesInCategory(state.notImportant, "notImportant");
+            
+            alert(`Loaded choices from: ${state.timestamp}`);
+        }
+        
+        // Place values in a category
+        function placeValuesInCategory(values, categoryId) {
+            const categoryElement = document.getElementById(categoryId);
+            
+            values.forEach(valueText => {
+                // Find the value element in the values container
+                const allValueElements = document.querySelectorAll(".value");
+                for (let element of allValueElements) {
+                    if (element.textContent === valueText) {
+                        categoryElement.appendChild(element);
+                        break;
+                    }
+                }
+            });
+        }
+        
+        // Reset all values to the values container
+        function resetAll() {
+            if (confirm("Are you sure you want to reset all your choices?")) {
+                resetCategories();
+            }
+        }
+        
+        // Reset categories by moving all values back to the values container
+        function resetCategories() {
+            const valuesContainer = document.getElementById("valuesContainer");
+            const valueElements = document.querySelectorAll(".value");
+            
+            valueElements.forEach(element => {
+                valuesContainer.appendChild(element);
+            });
         }
     </script>
 </body>
