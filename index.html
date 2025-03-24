@@ -1,44 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Values Card Sort</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .header {
-            background-color: #a7f3d0;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .value-card {
-            background-color: #d1fae5;
-            border: 1px solid #10b981;
-            padding: 10px;
-            margin: 10px;
-            border-radius: 5px;
-            display: inline-block;
-            width: 200px;
-        }
-    </style>
+    <title>Personal Values Card Sort</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="header">
-        <h1>Personal Values Card Sort</h1>
-        <p>Simple test version</p>
+    <div id="app">
+        <div class="header">
+            <h1>Personal Values Card Sort</h1>
+            <p>Sort your values into different categories</p>
+            <button id="resetButton">Reset All Cards</button>
+        </div>
+        
+        <div class="categories">
+            <div class="category" id="important">
+                <h2>IMPORTANT TO ME</h2>
+                <div class="card-container" id="important-container"></div>
+            </div>
+            
+            <div class="category" id="veryImportant">
+                <h2>VERY IMPORTANT TO ME</h2>
+                <div class="card-container" id="veryImportant-container"></div>
+            </div>
+            
+            <div class="category" id="notImportant">
+                <h2>NOT IMPORTANT TO ME</h2>
+                <div class="card-container" id="notImportant-container"></div>
+            </div>
+        </div>
+        
+        <div class="unsorted">
+            <h2>Unsorted Values</h2>
+            <div class="card-grid" id="unsorted-container"></div>
+        </div>
     </div>
     
-    <div class="value-card">
-        <h3>ACCEPTANCE</h3>
-        <p>to be accepted as I am</p>
-    </div>
-    
-    <div class="value-card">
-        <h3>ADVENTURE</h3>
-        <p>to have new and exciting experiences</p>
-    </div>
+    <script src="script.js"></script>
 </body>
 </html>
