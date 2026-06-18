@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teach First — Brand Guidelines for Web</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+
+  :root {
+    /* ─── CORE BRAND COLOURS ─── */
+    --tf-blue:        #3764F0;   /* Teach First Blue — Pantone P2728 U */
+    --tf-yellow:      #FAC800;   /* Teach First Yellow */
+    --tf-black:       #000000;
+    --tf-white:       #FFFFFF;
+
+    /* ─── EXTENDED / TINTS (for web use) ─── */
+    --tf-blue-dark:   #1F3864;   /* Dark navy — used in table headers, footers */
+    --tf-blue-mid:    #2E75B6;   /* Mid blue — used in headings, borders */
+    --tf-blue-light:  #D6E4F7;   /* Light blue tint — used for backgrounds, highlights */
+    --tf-yellow-light:#FFF3B0;   /* Yellow tint — for callout backgrounds */
+    --tf-grey-100:    #F5F5F5;   /* Near-white backgrounds */
+    --tf-grey-200:    #E8E8E8;   /* Dividers, borders */
+    --tf-grey-600:    #555555;   /* Secondary body text */
+    --tf-grey-800:    #222222;   /* Primary body text */
+
+    /* ─── TYPOGRAPHY ─── */
+    --font-display:   'Noto Serif', Constantia, Georgia, serif;
+    --font-body:      'Barlow', Arial, sans-serif;
+
+    /* ─── SPACING ─── */
+    --sp-xs: 0.5rem;
+    --sp-sm: 1rem;
+    --sp-md: 1.5rem;
+    --sp-lg: 2.5rem;
+    --sp-xl: 4rem;
+    --sp-2xl: 6rem;
+
+    /* ─── BORDER RADIUS ─── */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+
+    /* ─── SHADOWS ─── */
+    --shadow-sm: 0 2px 8px rgba(55,100,240,0.08);
+    --shadow-md: 0 4px 24px rgba(55,100,240,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--tf-grey-800);
+    background: var(--tf-white);
+  }
+
+  /* ── NAVIGATION ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--tf-blue-dark);
+    padding: 0 var(--sp-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-lg);
+    height: 56px;
+    box-shadow: var(--shadow-md);
+  }
+
+  nav .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--tf-white);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  nav a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.15s;
+    white-space: nowrap;
+  }
+  nav a:hover { color: var(--tf-yellow); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--tf-blue);
+    color: var(--tf-white);
+    padding: var(--sp-2xl) var(--sp-lg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    background: rgba(250,200,0,0.12);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--tf-yellow);
+    margin-bottom: var(--sp-sm);
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: var(--sp-md);
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.85);
+    max-width: 600px;
+  }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 var(--sp-lg);
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: var(--sp-xl) var(--sp-lg);
+    border-bottom: 1px solid var(--tf-grey-200);
+  }
+
+  section:last-child { border-bottom: none; }
+
+  .section-inner {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--tf-blue);
+    margin-bottom: var(--sp-sm);
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: var(--tf-blue-dark);
+    margin-bottom: var(--sp-md);
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--tf-blue-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: var(--sp-xs);
+    margin-top: var(--sp-md);
+  }
+
+  p { margin-bottom: var(--sp-sm); color: var(--tf-grey-800); }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── COLOUR PALETTE ── */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--sp-sm);
+    margin-top: var(--sp-md);
+  }
+
+  .swatch {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--tf-grey-200);
+  }
+
+  .swatch-colour {
+    height: 90px;
+  }
+
+  .swatch-info {
+    padding: 10px 12px;
+    background: var(--tf-white);
+  }
+
+  .swatch-name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--tf-grey-800);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .swatch-meta {
+    font-size: 0.7rem;
+    color: var(--tf-grey-600);
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+  }
+
+  .palette-note {
+    margin-top: var(--sp-md);
+    padding: var(--sp-sm) var(--sp-md);
+    background: var(--tf-blue-light);
+    border-left: 3px solid var(--tf-blue);
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    color: var(--tf-blue-dark);
+  }
+
+  /* ── CSS VARIABLES BLOCK ── */
+  .code-block {
+    background: var(--tf-grey-800);
+    color: #e8f0fe;
+    border-radius: var(--radius-md);
+    padding: var(--sp-md);
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    margin-top: var(--sp-md);
+    position: relative;
+  }
+
+  .code-block .comment { color: #6a9f68; }
+  .code-block .var-name { color: #c792ea; }
+  .code-block .var-value { color: #fac800; }
+
+  .code-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tf-grey-600);
+    margin-bottom: var(--sp-xs);
+  }
+
+  /* ── TYPOGRAPHY SPECIMENS ── */
+  .type-specimen {
+    padding: var(--sp-md);
+    border: 1px solid var(--tf-grey-200);
+    border-radius: var(--radius-md);
+    margin-top: var(--sp-sm);
+    margin-bottom: var(--sp-sm);
+  }
+
+  .type-meta {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--tf-grey-600);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .specimen-display {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--tf-blue-dark);
+    line-height: 1.15;
+  }
+
+  .specimen-body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--tf-grey-800);
+    line-height: 1.65;
+  }
+
+  .specimen-label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tf-blue);
+  }
+
+  .type-scale {
+    margin-top: var(--sp-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-xs);
+  }
+
+  .type-scale-item {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-sm);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--tf-grey-200);
+  }
+
+  .type-scale-label {
+    font-size: 0.68rem;
+    color: var(--tf-grey-600);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    min-width: 110px;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* ── UI COMPONENTS DEMO ── */
+  .component-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-sm);
+    margin-top: var(--sp-md);
+    align-items: flex-start;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid transparent;
+    letter-spacing: 0.02em;
+    transition: all 0.15s ease;
+  }
+
+  .btn-primary {
+    background: var(--tf-blue);
+    color: var(--tf-white);
+    border-color: var(--tf-blue);
+  }
+  .btn-primary:hover { background: var(--tf-blue-dark); border-color: var(--tf-blue-dark); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--tf-blue);
+    border-color: var(--tf-blue);
+  }
+  .btn-secondary:hover { background: var(--tf-blue); color: var(--tf-white); }
+
+  .btn-yellow {
+    background: var(--tf-yellow);
+    color: var(--tf-black);
+    border-color: var(--tf-yellow);
+  }
+  .btn-yellow:hover { background: #e6b400; border-color: #e6b400; }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--tf-white);
+    border-color: rgba(255,255,255,0.6);
+  }
+
+  /* Cards */
+  .card-demo {
+    background: var(--tf-white);
+    border: 1px solid var(--tf-grey-200);
+    border-radius: var(--radius-md);
+    padding: var(--sp-md);
+    box-shadow: var(--shadow-sm);
+    max-width: 280px;
+    margin-top: var(--sp-md);
+  }
+
+  .card-demo-accent {
+    height: 4px;
+    background: var(--tf-blue);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    margin: calc(-1 * var(--sp-md)) calc(-1 * var(--sp-md)) var(--sp-sm);
+  }
+
+  .card-demo h4 {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--tf-blue-dark);
+    margin-bottom: 6px;
+  }
+
+  .card-demo p {
+    font-size: 0.85rem;
+    color: var(--tf-grey-600);
+    margin: 0;
+  }
+
+  /* Badges */
+  .badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .badge-blue { background: var(--tf-blue); color: var(--tf-white); }
+  .badge-yellow { background: var(--tf-yellow); color: var(--tf-black); }
+  .badge-outline { background: transparent; border: 2px solid var(--tf-blue); color: var(--tf-blue); }
+  .badge-dark { background: var(--tf-blue-dark); color: var(--tf-white); }
+
+  /* Callout / alert */
+  .callout {
+    border-left: 4px solid var(--tf-blue);
+    background: var(--tf-blue-light);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: var(--sp-sm) var(--sp-md);
+    margin-top: var(--sp-md);
+  }
+
+  .callout p { font-size: 0.9rem; color: var(--tf-blue-dark); margin: 0; }
+
+  /* Nav bar demo */
+  .nav-demo {
+    background: var(--tf-blue-dark);
+    border-radius: var(--radius-md);
+    height: 52px;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--sp-md);
+    gap: var(--sp-md);
+    margin-top: var(--sp-md);
+  }
+
+  .nav-demo-logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--tf-white);
+  }
+
+  .nav-demo-links {
+    display: flex;
+    gap: var(--sp-md);
+    margin-left: auto;
+  }
+
+  .nav-demo-links span {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.7);
+    font-weight: 500;
+  }
+
+  .nav-demo-links span.active { color: var(--tf-yellow); }
+
+  /* Hero section demo */
+  .hero-demo {
+    background: var(--tf-blue);
+    border-radius: var(--radius-md);
+    padding: var(--sp-lg) var(--sp-md);
+    margin-top: var(--sp-md);
+    color: var(--tf-white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-demo::after {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(250,200,0,0.1);
+    pointer-events: none;
+  }
+
+  .hero-demo h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--tf-white);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: 8px;
+    margin-top: 0;
+  }
+
+  .hero-demo p {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: var(--sp-md);
+  }
+
+  /* ── MOTION ── */
+  .motion-note {
+    background: var(--tf-grey-100);
+    border-radius: var(--radius-md);
+    padding: var(--sp-md);
+    margin-top: var(--sp-md);
+  }
+
+  .motion-note ul {
+    padding-left: var(--sp-md);
+    margin-top: 8px;
+  }
+
+  .motion-note li {
+    font-size: 0.88rem;
+    color: var(--tf-grey-600);
+    margin-bottom: 4px;
+  }
+
+  /* ── DO / DON'T ── */
+  .do-dont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-sm);
+    margin-top: var(--sp-md);
+  }
+
+  @media (max-width: 600px) {
+    .do-dont { grid-template-columns: 1fr; }
+  }
+
+  .do-box, .dont-box {
+    border-radius: var(--radius-md);
+    padding: var(--sp-md);
+    font-size: 0.88rem;
+  }
+
+  .do-box {
+    background: #edf7ee;
+    border-top: 4px solid #2e7d32;
+  }
+
+  .dont-box {
+    background: #fdecea;
+    border-top: 4px solid #c62828;
+  }
+
+  .do-box .label { color: #2e7d32; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+  .dont-box .label { color: #c62828; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+
+  .do-box ul, .dont-box ul {
+    padding-left: var(--sp-md);
+  }
+
+  .do-box li, .dont-box li {
+    margin-bottom: 4px;
+    color: var(--tf-grey-800);
+  }
+
+  /* ── ACCESSIBILITY ── */
+  .contrast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--sp-sm);
+    margin-top: var(--sp-md);
+  }
+
+  .contrast-pair {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--tf-grey-200);
+  }
+
+  .contrast-demo {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  .contrast-info {
+    padding: 8px 12px;
+    background: var(--tf-white);
+  }
+
+  .contrast-ratio {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: var(--tf-grey-600);
+  }
+
+  .pass { color: #2e7d32; font-weight: 700; font-size: 0.72rem; }
+  .fail { color: #c62828; font-weight: 700; font-size: 0.72rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--tf-blue-dark);
+    color: rgba(255,255,255,0.7);
+    padding: var(--sp-xl) var(--sp-lg);
+    font-size: 0.85rem;
+  }
+
+  footer .footer-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: var(--sp-md);
+  }
+
+  footer strong { color: var(--tf-white); }
+
+  /* ── MISC ── */
+  .divider {
+    height: 1px;
+    background: var(--tf-grey-200);
+    margin: var(--sp-md) 0;
+  }
+
+  .inline-code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.82em;
+    background: var(--tf-grey-100);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--tf-blue-dark);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--sp-md);
+    font-size: 0.88rem;
+  }
+
+  th {
+    background: var(--tf-blue-dark);
+    color: var(--tf-white);
+    text-align: left;
+    padding: 10px 14px;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--tf-grey-200);
+    vertical-align: top;
+    color: var(--tf-grey-800);
+  }
+
+  tr:nth-child(even) td { background: var(--tf-grey-100); }
+
+  .strapline {
+    font-family: 'Dancing Script', cursive, serif;
+    font-size: 1.6rem;
+    color: var(--tf-blue);
+    font-style: italic;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <span class="nav-logo">Teach First — Brand Guidelines</span>
+  <a href="#colours">Colours</a>
+  <a href="#typography">Typography</a>
+  <a href="#layout">Layout</a>
+  <a href="#components">Components</a>
+  <a href="#motion">Motion</a>
+  <a href="#accessibility">Accessibility</a>
+  <a href="#voice">Voice</a>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-tag">Web Brand Guidelines · Claude Code Reference</p>
+    <h1>Teach First<br>Brand System</h1>
+    <p>Everything Claude Code needs to build on-brand digital products. Colours, typography, spacing, components, motion, accessibility, and voice — all in one place. Read this before touching a line of CSS.</p>
+  </div>
+</div>
+
+<!-- ── OVERVIEW ── -->
+<section>
+  <div class="section-inner">
+    <p class="section-tag">Overview</p>
+    <h2>What this document is for</h2>
+    <p>This is a web-specific translation of the Teach First brand toolkit. The brand was built for communications, print, and marketing. This document adapts it for digital products — apps, dashboards, and web interfaces — so everything we build feels recognisably Teach First.</p>
+    <p>The core brand idea is <strong>Rewrite the future</strong>. Everything in the digital product should carry that same energy: clear, purposeful, confident, and warm.</p>
+
+    <div class="callout">
+      <p>📌 <strong>Registered charity, no. 1098294.</strong> Include this in the footer of all public-facing products.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── COLOURS ── -->
+<section id="colours">
+  <div class="section-inner">
+    <p class="section-tag">Colours</p>
+    <h2>Colour palette</h2>
+    <p>The primary palette is three colours: blue, yellow, and black on white. The digital system adds extended tints for web use — backgrounds, borders, and secondary text — which are not in the core brand palette but are derived from it.</p>
+
+    <h3>Primary brand colours</h3>
+    <div class="palette-grid">
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#3764F0;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Teach First Blue</span>
+          <span class="swatch-meta">HEX #3764F0<br>RGB 55 / 100 / 240<br>Pantone P2728 U</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#FAC800; border-bottom: 1px solid #e8e8e8;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Teach First Yellow</span>
+          <span class="swatch-meta">HEX #FAC800<br>RGB 250 / 200 / 50</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#000000;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Black</span>
+          <span class="swatch-meta">HEX #000000<br>RGB 0 / 0 / 0</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#FFFFFF; border: 1px solid #e8e8e8;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">White</span>
+          <span class="swatch-meta">HEX #FFFFFF<br>RGB 255 / 255 / 255</span>
+        </div>
+      </div>
+    </div>
+
+    <h3>Extended web tints (digital use only)</h3>
+    <div class="palette-grid">
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#1F3864;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Blue Dark</span>
+          <span class="swatch-meta">HEX #1F3864<br>Nav, table headers, footers</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#2E75B6;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Blue Mid</span>
+          <span class="swatch-meta">HEX #2E75B6<br>Headings, borders, accents</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#D6E4F7;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Blue Light</span>
+          <span class="swatch-meta">HEX #D6E4F7<br>Callout backgrounds, tints</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#FFF3B0; border-bottom: 1px solid #e8e8e8;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Yellow Light</span>
+          <span class="swatch-meta">HEX #FFF3B0<br>Warning/info backgrounds</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#F5F5F5; border-bottom: 1px solid #e8e8e8;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Grey 100</span>
+          <span class="swatch-meta">HEX #F5F5F5<br>Page backgrounds, zebra rows</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#555555;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Grey 600</span>
+          <span class="swatch-meta">HEX #555555<br>Secondary/supporting text</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="palette-note">
+      <strong>Colour priority rule:</strong> Blue is the dominant colour for interactive elements and headings. Yellow is an accent — use it sparingly for CTAs, highlights, and badges. Black for high-impact copy only. Never use yellow as a background for large areas of text; contrast is borderline at body size.
+    </div>
+
+    <h3>CSS custom properties — copy into <span class="inline-code">:root</span></h3>
+    <p class="code-label">styles/tokens.css (or equivalent)</p>
+    <div class="code-block"><span class="comment">/* ─── Teach First brand tokens ─── */</span>
+<span class="var-name">:root</span> {
+  <span class="comment">/* Primary */</span>
+  --tf-blue:        <span class="var-value">#3764F0</span>;
+  --tf-yellow:      <span class="var-value">#FAC800</span>;
+  --tf-black:       <span class="var-value">#000000</span>;
+  --tf-white:       <span class="var-value">#FFFFFF</span>;
+
+  <span class="comment">/* Extended — web only */</span>
+  --tf-blue-dark:   <span class="var-value">#1F3864</span>;  <span class="comment">/* nav, table headers, footer */</span>
+  --tf-blue-mid:    <span class="var-value">#2E75B6</span>;  <span class="comment">/* headings, borders */</span>
+  --tf-blue-light:  <span class="var-value">#D6E4F7</span>;  <span class="comment">/* callouts, tints */</span>
+  --tf-yellow-light:<span class="var-value">#FFF3B0</span>;  <span class="comment">/* warning backgrounds */</span>
+  --tf-grey-100:    <span class="var-value">#F5F5F5</span>;  <span class="comment">/* page/card backgrounds */</span>
+  --tf-grey-200:    <span class="var-value">#E8E8E8</span>;  <span class="comment">/* borders, dividers */</span>
+  --tf-grey-600:    <span class="var-value">#555555</span>;  <span class="comment">/* secondary text */</span>
+  --tf-grey-800:    <span class="var-value">#222222</span>;  <span class="comment">/* primary body text */</span>
+}</div>
+  </div>
+</section>
+
+<!-- ── TYPOGRAPHY ── -->
+<section id="typography">
+  <div class="section-inner">
+    <p class="section-tag">Typography</p>
+    <h2>Type system</h2>
+    <p>Two typefaces. One for display and headings, one for everything else. Don't mix them up.</p>
+
+    <div class="type-specimen">
+      <p class="type-meta">Display / Headings — Noe Text (design) / Constantia (system fallback)</p>
+      <p class="specimen-display">Education changes everything.</p>
+      <p style="font-size:0.78rem; color:var(--tf-grey-600); margin-top:8px; font-family:monospace;">font-family: 'Noe Text', Constantia, Georgia, serif</p>
+    </div>
+
+    <div class="type-specimen">
+      <p class="type-meta">Body / UI — Barlow (design) / Arial (system fallback)</p>
+      <p class="specimen-body">We are building a movement of teachers and leaders working across education. Since 2003, Teach First has been training teachers, supporting schools, and speaking out for children facing disadvantage.</p>
+      <p style="font-size:0.78rem; color:var(--tf-grey-600); margin-top:8px; font-family:monospace;">font-family: 'Barlow', Arial, sans-serif</p>
+    </div>
+
+    <div class="type-specimen">
+      <p class="type-meta">Labels / Tags / Badges</p>
+      <p class="specimen-label">NPQ Programme · Cohort 5 · Active</p>
+      <p style="font-size:0.78rem; color:var(--tf-grey-600); margin-top:8px; font-family:monospace;">Barlow 700 · uppercase · letter-spacing: 0.08–0.12em</p>
+    </div>
+
+    <h3>Type scale</h3>
+    <div class="type-scale">
+      <div class="type-scale-item">
+        <span class="type-scale-label">H1 · 2.8–3.5rem</span>
+        <span style="font-family:var(--font-display); font-size:2rem; font-weight:700; color:var(--tf-blue-dark);">Rewrite the future</span>
+      </div>
+      <div class="type-scale-item">
+        <span class="type-scale-label">H2 · 1.8–2.2rem</span>
+        <span style="font-family:var(--font-display); font-size:1.5rem; font-weight:700; color:var(--tf-blue-dark);">Programme overview</span>
+      </div>
+      <div class="type-scale-item">
+        <span class="type-scale-label">H3 · 1rem</span>
+        <span style="font-family:var(--font-body); font-size:0.95rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--tf-blue-dark);">Section heading</span>
+      </div>
+      <div class="type-scale-item">
+        <span class="type-scale-label">Body · 1rem</span>
+        <span style="font-family:var(--font-body); font-size:1rem; color:var(--tf-grey-800);">Standard paragraph text, line-height 1.65</span>
+      </div>
+      <div class="type-scale-item">
+        <span class="type-scale-label">Small · 0.88rem</span>
+        <span style="font-family:var(--font-body); font-size:0.85rem; color:var(--tf-grey-600);">Supporting text, captions, table content</span>
+      </div>
+      <div class="type-scale-item">
+        <span class="type-scale-label">Label · 0.72–0.78rem</span>
+        <span style="font-family:var(--font-body); font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--tf-blue);">CATEGORY TAG · BADGE</span>
+      </div>
+    </div>
+
+    <h3>Google Fonts import</h3>
+    <div class="code-block">&lt;link href=<span class="var-value">"https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Noto+Serif:wght@400;700&amp;display=swap"</span> rel=<span class="var-value">"stylesheet"</span>&gt;
+
+<span class="comment">/* Noto Serif = closest freely available match for Noe Text */</span>
+<span class="comment">/* System fallback chain: Noto Serif → Constantia → Georgia → serif */</span>
+<span class="comment">/* Body fallback chain:   Barlow → Arial → sans-serif */</span></div>
+
+    <div class="do-dont">
+      <div class="do-box">
+        <p class="label">✓ Do</p>
+        <ul>
+          <li>Use serif (Noto/Constantia) for all H1 and H2 headings</li>
+          <li>Use Barlow/Arial for all body, UI labels, and nav</li>
+          <li>Make heading colour <span class="inline-code">#1F3864</span> on white, or white on blue</li>
+          <li>Use <span class="inline-code">clamp()</span> for responsive heading sizes</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <p class="label">✗ Don't</p>
+        <ul>
+          <li>Use Inter, Roboto, or system-ui as a design choice</li>
+          <li>Mix serif into body copy or UI labels</li>
+          <li>Use Barlow for page-level H1 headings</li>
+          <li>Set body text below 0.88rem or above 1.1rem</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── LAYOUT ── -->
+<section id="layout">
+  <div class="section-inner">
+    <p class="section-tag">Layout &amp; Spacing</p>
+    <h2>Grid, spacing, and containers</h2>
+
+    <table>
+      <tr><th>Token</th><th>Value</th><th>Use</th></tr>
+      <tr><td><span class="inline-code">--sp-xs</span></td><td>0.5rem / 8px</td><td>Tight gaps, icon padding, chip spacing</td></tr>
+      <tr><td><span class="inline-code">--sp-sm</span></td><td>1rem / 16px</td><td>Card padding, small gaps, inline spacing</td></tr>
+      <tr><td><span class="inline-code">--sp-md</span></td><td>1.5rem / 24px</td><td>Standard content padding, section gaps within a block</td></tr>
+      <tr><td><span class="inline-code">--sp-lg</span></td><td>2.5rem / 40px</td><td>Horizontal page padding, between-component gaps</td></tr>
+      <tr><td><span class="inline-code">--sp-xl</span></td><td>4rem / 64px</td><td>Section vertical padding, hero padding</td></tr>
+      <tr><td><span class="inline-code">--sp-2xl</span></td><td>6rem / 96px</td><td>Hero top/bottom padding on desktop</td></tr>
+    </table>
+
+    <h3>Max-width containers</h3>
+    <table>
+      <tr><th>Name</th><th>Width</th><th>Use case</th></tr>
+      <tr><td>Narrow</td><td>680px</td><td>Prose, single-column forms</td></tr>
+      <tr><td>Standard</td><td>860–920px</td><td>Main content, most pages</td></tr>
+      <tr><td>Wide</td><td>1140px</td><td>Dashboard, data-heavy layouts</td></tr>
+      <tr><td>Full bleed</td><td>100%</td><td>Hero sections, coloured bands only</td></tr>
+    </table>
+
+    <h3>Border radius</h3>
+    <div class="component-row" style="align-items:center;">
+      <div style="width:48px; height:48px; background:var(--tf-blue); border-radius:4px;"></div>
+      <span style="font-size:0.8rem; color:var(--tf-grey-600);">4px — buttons, badges, small chips</span>
+      <div style="width:48px; height:48px; background:var(--tf-blue); border-radius:8px; margin-left:var(--sp-md);"></div>
+      <span style="font-size:0.8rem; color:var(--tf-grey-600);">8px — cards, inputs, panels</span>
+      <div style="width:48px; height:48px; background:var(--tf-blue); border-radius:16px; margin-left:var(--sp-md);"></div>
+      <span style="font-size:0.8rem; color:var(--tf-grey-600);">16px — modal dialogs, larger containers</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMPONENTS ── -->
+<section id="components">
+  <div class="section-inner">
+    <p class="section-tag">Components</p>
+    <h2>UI component patterns</h2>
+
+    <h3>Navigation bar</h3>
+    <div class="nav-demo">
+      <span class="nav-demo-logo">Teach First</span>
+      <div class="nav-demo-links">
+        <span>Programmes</span>
+        <span class="active">NPQ</span>
+        <span>Resources</span>
+        <span>Support</span>
+      </div>
+    </div>
+    <p style="font-size:0.82rem; color:var(--tf-grey-600); margin-top:8px;">Background: <span class="inline-code">--tf-blue-dark (#1F3864)</span> · Active item: <span class="inline-code">--tf-yellow</span> · Height: 52–56px · Logo: serif bold</p>
+
+    <h3>Hero section</h3>
+    <div class="hero-demo">
+      <h3>NPQ 1:1 Coaching Support</h3>
+      <p>Wherever you lead, children deserve the very best — and great leaders deserve great support.</p>
+      <span class="btn btn-yellow">Get started</span>
+      <span class="btn btn-ghost" style="margin-left:12px;">Find out more</span>
+    </div>
+    <p style="font-size:0.82rem; color:var(--tf-grey-600); margin-top:8px;">Background: <span class="inline-code">--tf-blue</span> · H1: serif, white · Subtext: white 85% opacity · Decorative circle: yellow 10% opacity, top-right</p>
+
+    <h3>Buttons</h3>
+    <div class="component-row">
+      <button class="btn btn-primary">Primary action</button>
+      <button class="btn btn-secondary">Secondary</button>
+      <button class="btn btn-yellow">CTA / Highlight</button>
+    </div>
+    <div class="code-block"><span class="comment">/* Primary — blue fill, white text */</span>
+.btn-primary { background: <span class="var-value">var(--tf-blue)</span>; color: <span class="var-value">var(--tf-white)</span>; }
+
+<span class="comment">/* Secondary — outlined */</span>
+.btn-secondary { background: transparent; color: <span class="var-value">var(--tf-blue)</span>; border: 2px solid <span class="var-value">var(--tf-blue)</span>; }
+
+<span class="comment">/* CTA — yellow, black text (high visibility) */</span>
+.btn-yellow { background: <span class="var-value">var(--tf-yellow)</span>; color: <span class="var-value">var(--tf-black)</span>; }
+
+<span class="comment">/* Shared */</span>
+.btn { padding: 12px 28px; border-radius: 4px; font-weight: 600; font-family: <span class="var-value">var(--font-body)</span>; }</div>
+
+    <h3>Badges &amp; status chips</h3>
+    <div class="component-row">
+      <span class="badge badge-blue">Active</span>
+      <span class="badge badge-yellow">New cohort</span>
+      <span class="badge badge-outline">NPQ</span>
+      <span class="badge badge-dark">C5</span>
+    </div>
+
+    <h3>Cards</h3>
+    <div class="component-row">
+      <div class="card-demo">
+        <div class="card-demo-accent"></div>
+        <h4>NPQSL Programme</h4>
+        <p>Senior Leadership pathway — Cohort 5 now open for enrolment.</p>
+      </div>
+    </div>
+    <p style="font-size:0.82rem; color:var(--tf-grey-600); margin-top:8px;">Cards use a 4px top accent bar in <span class="inline-code">--tf-blue</span>, white background, 1px grey border, and soft box-shadow.</p>
+
+    <h3>Callouts &amp; alerts</h3>
+    <div class="callout">
+      <p><strong>Note:</strong> Callouts use a 4px left border in <span class="inline-code">--tf-blue</span> with a light blue tint background. Use for guidance, not for critical errors.</p>
+    </div>
+
+    <div style="border-left: 4px solid #FAC800; background: var(--tf-yellow-light); border-radius: 0 4px 4px 0; padding: var(--sp-sm) var(--sp-md); margin-top: var(--sp-sm);">
+      <p style="font-size:0.88rem; color:var(--tf-grey-800); margin:0;"><strong>Yellow callout:</strong> Use for informational notes or deadlines. Left border <span class="inline-code">--tf-yellow</span>, background <span class="inline-code">--tf-yellow-light</span>.</p>
+    </div>
+
+    <h3>Tables</h3>
+    <table style="margin-top:var(--sp-sm);">
+      <tr><th>Programme</th><th>Cohort</th><th>Status</th></tr>
+      <tr><td>NPQSL</td><td>C5</td><td><span class="badge badge-blue" style="font-size:0.65rem;">Active</span></td></tr>
+      <tr><td>NPQML</td><td>C4B</td><td><span class="badge badge-outline" style="font-size:0.65rem;">Closing</span></td></tr>
+    </table>
+    <p style="font-size:0.82rem; color:var(--tf-grey-600); margin-top:8px;">Table header: <span class="inline-code">--tf-blue-dark</span> background, white text. Zebra rows: <span class="inline-code">--tf-grey-100</span>. Borders: <span class="inline-code">--tf-grey-200</span>.</p>
+  </div>
+</section>
+
+<!-- ── MOTION ── -->
+<section id="motion">
+  <div class="section-inner">
+    <p class="section-tag">Motion &amp; Interaction</p>
+    <h2>Animation principles</h2>
+    <p>Motion should feel purposeful and efficient. The brand is confident and energetic — not fussy. Transitions are quick, reveals are clean.</p>
+
+    <div class="motion-note">
+      <strong style="font-size:0.88rem; color:var(--tf-grey-800);">Core rules:</strong>
+      <ul>
+        <li><strong>Duration:</strong> Interactive transitions 150–200ms. Page-level reveals 300–400ms.</li>
+        <li><strong>Easing:</strong> <span class="inline-code">ease</span> or <span class="inline-code">cubic-bezier(0.25, 0, 0.1, 1)</span> for most transitions. Avoid bounce/spring unless the product is explicitly playful.</li>
+        <li><strong>Hover states:</strong> All interactive elements must have a visible hover. Colour shift or subtle shadow lift. Never opacity-only.</li>
+        <li><strong>Page load:</strong> A single fade-up stagger on key sections is enough. Don't animate everything — it dilutes impact.</li>
+        <li><strong>Respect user preference:</strong> Wrap animation in <span class="inline-code">@media (prefers-reduced-motion: no-preference)</span>.</li>
+      </ul>
+    </div>
+
+    <div class="code-block"><span class="comment">/* Standard hover transition — apply to all interactive elements */</span>
+transition: all <span class="var-value">0.15s</span> ease;
+
+<span class="comment">/* Page entry — content reveal */</span>
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal { animation: fadeUp <span class="var-value">0.35s</span> ease forwards; }
+
+<span class="comment">/* Stagger children */</span>
+.reveal:nth-child(2) { animation-delay: <span class="var-value">0.08s</span>; }
+.reveal:nth-child(3) { animation-delay: <span class="var-value">0.16s</span>; }
+
+<span class="comment">/* Respect preferences */</span>
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}</div>
+  </div>
+</section>
+
+<!-- ── ACCESSIBILITY ── -->
+<section id="accessibility">
+  <div class="section-inner">
+    <p class="section-tag">Accessibility</p>
+    <h2>Colour contrast &amp; WCAG compliance</h2>
+    <p>All text must meet WCAG 2.1 AA as a minimum. The table below shows approved combinations.</p>
+
+    <div class="contrast-grid">
+      <div class="contrast-pair">
+        <div class="contrast-demo" style="background:#3764F0; color:#FFFFFF;">White on Blue</div>
+        <div class="contrast-info">
+          <div class="contrast-ratio">#FFFFFF on #3764F0</div>
+          <div class="pass">✓ PASS AA (4.5:1+)</div>
+        </div>
+      </div>
+      <div class="contrast-pair">
+        <div class="contrast-demo" style="background:#1F3864; color:#FFFFFF;">White on Dark</div>
+        <div class="contrast-info">
+          <div class="contrast-ratio">#FFFFFF on #1F3864</div>
+          <div class="pass">✓ PASS AAA (12:1+)</div>
+        </div>
+      </div>
+      <div class="contrast-pair">
+        <div class="contrast-demo" style="background:#FAC800; color:#000000;">Black on Yellow</div>
+        <div class="contrast-info">
+          <div class="contrast-ratio">#000000 on #FAC800</div>
+          <div class="pass">✓ PASS AA (9:1+)</div>
+        </div>
+      </div>
+      <div class="contrast-pair">
+        <div class="contrast-demo" style="background:#FAC800; color:#3764F0;">Blue on Yellow</div>
+        <div class="contrast-info">
+          <div class="contrast-ratio">#3764F0 on #FAC800</div>
+          <div class="fail">✗ FAIL (2.5:1)</div>
+        </div>
+      </div>
+      <div class="contrast-pair">
+        <div class="contrast-demo" style="background:#FFFFFF; color:#222222;">Dark on White</div>
+        <div class="contrast-info">
+          <div class="contrast-ratio">#222222 on #FFFFFF</div>
+          <div class="pass">✓ PASS AAA (15:1+)</div>
+        </div>
+      </div>
+      <div class="contrast-pair">
+        <div class="contrast-demo" style="background:#FFFFFF; color:#555555;">Grey on White</div>
+        <div class="contrast-info">
+          <div class="contrast-ratio">#555555 on #FFFFFF</div>
+          <div class="pass">✓ PASS AA (7:1+)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:var(--sp-md);">
+      <p>⚠️ Never place blue text on yellow, or yellow text on blue. Both fail WCAG AA. Yellow text on white also fails — always use black text on yellow backgrounds.</p>
+    </div>
+
+    <h3>General accessibility rules</h3>
+    <table>
+      <tr><th>Area</th><th>Requirement</th></tr>
+      <tr><td>Focus states</td><td>All interactive elements must have a visible <span class="inline-code">:focus-visible</span> outline. Use <span class="inline-code">outline: 3px solid #FAC800</span> on dark backgrounds, <span class="inline-code">outline: 3px solid #3764F0</span> on light ones.</td></tr>
+      <tr><td>Minimum touch target</td><td>44×44px for all buttons, links, and controls.</td></tr>
+      <tr><td>Images</td><td>All <span class="inline-code">&lt;img&gt;</span> elements must have descriptive <span class="inline-code">alt</span> text. Decorative images use <span class="inline-code">alt=""</span>.</td></tr>
+      <tr><td>Form labels</td><td>Every input needs a visible <span class="inline-code">&lt;label&gt;</span>. Don't rely on placeholder text alone.</td></tr>
+      <tr><td>Heading hierarchy</td><td>One H1 per page. H2 → H3 in logical order. Never skip levels.</td></tr>
+      <tr><td>Colour alone</td><td>Never use colour as the only way to convey status. Pair with an icon or text label.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ── VOICE ── -->
+<section id="voice">
+  <div class="section-inner">
+    <p class="section-tag">Voice &amp; Tone</p>
+    <h2>How we write in digital products</h2>
+    <p>Teach First's brand voice is positive, purposeful, and empowering. In a digital product context that means: short sentences, plain language, and a warm but direct tone. Write like a knowledgeable colleague, not a policy document.</p>
+
+    <div class="do-dont">
+      <div class="do-box">
+        <p class="label">✓ Do write like this</p>
+        <ul>
+          <li>"Your call window opens on 14 January."</li>
+          <li>"Something went wrong. Try refreshing the page."</li>
+          <li>"You're all set — we'll send a confirmation shortly."</li>
+          <li>"Can't find what you're looking for? Contact your DL."</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <p class="label">✗ Avoid this</p>
+        <ul>
+          <li>"Please be advised that your scheduled call window will commence on…"</li>
+          <li>"An error has been encountered. Please try again."</li>
+          <li>"Your submission has been successfully processed."</li>
+          <li>"Leverage the resources available via the portal."</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Microcopy principles</h3>
+    <table>
+      <tr><th>Context</th><th>Approach</th></tr>
+      <tr><td>Empty states</td><td>Warm and action-oriented. "Nothing here yet — your calls will appear once scheduled."</td></tr>
+      <tr><td>Error messages</td><td>Say what happened and what to do next. No blame, no jargon.</td></tr>
+      <tr><td>Success messages</td><td>Brief and positive. Confirm what happened, not what the system did.</td></tr>
+      <tr><td>Form labels</td><td>Short noun phrases. Not "Please enter your…" — just "Email address".</td></tr>
+      <tr><td>CTA buttons</td><td>Verb-first. "Book a call", "View your programme", "Download guide". Avoid "Submit" or "Click here".</td></tr>
+      <tr><td>Loading states</td><td>Reassuring. "Loading your programme…" or just a spinner with no text.</td></tr>
+    </table>
+
+    <div class="callout">
+      <p>📌 <strong>Strapline use:</strong> "Rewrite the future" is for marketing and external communications. Don't drop it into product UI copy — it'll feel out of place inside a dashboard or form. Save it for landing pages and splash screens.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <strong>Teach First Brand Guidelines — Web Reference</strong><br>
+      For internal use when building digital products on the Teach First brand.<br>
+      Source: Teach First Brand Toolkit (Jan 2024 edition).
+    </div>
+    <div style="text-align:right;">
+      Registered charity, no. 1098294<br>
+      teachfirst.org.uk
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
