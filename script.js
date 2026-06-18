@@ -304,7 +304,7 @@ function renderPhase2() {
   document.getElementById('phase2-desc').innerHTML =
     total === 1
       ? 'You have one Very Important value. Continue to see your results.'
-      : `Use the arrows to order your values from <strong>1 (most significant)</strong> to <strong>${total} (least significant)</strong>. Take your time — you can adjust until you're happy.`;
+      : `Drag to reorder your values from <strong>1 (most significant)</strong> to <strong>${total} (least significant)</strong>. Take your time — you can adjust until you're happy.`;
 
   state.rankedValues.forEach((id, index) => {
     const value = allValues.find(v => v.id === id);
@@ -313,26 +313,63 @@ function renderPhase2() {
     const li = document.createElement('li');
     li.className = 'rank-item';
     li.dataset.id = id;
+    li.setAttribute('draggable', 'true');
     li.innerHTML = `
+      <span class="drag-handle" aria-hidden="true">⠿</span>
       <span class="rank-number">${index + 1}</span>
       <div class="rank-body">
         <strong class="rank-name">${value.name}</strong>
         <span class="rank-desc">${value.description}</span>
       </div>
-      <div class="rank-controls">
-        <button class="rank-btn rank-up" aria-label="Move ${value.name} up"
-                ${index === 0 ? 'disabled' : ''}>↑</button>
-        <button class="rank-btn rank-down" aria-label="Move ${value.name} down"
-                ${index === total - 1 ? 'disabled' : ''}>↓</button>
-      </div>
     `;
 
-    li.querySelector('.rank-up').addEventListener('click', () => moveRanked(id, -1));
-    li.querySelector('.rank-down').addEventListener('click', () => moveRanked(id, 1));
+    li.addEventListener('dragstart', onDragStart);
+    li.addEventListener('dragover',  onDragOver);
+    li.addEventListener('dragleave', onDragLeave);
+    li.addEventListener('drop',      onDrop);
+    li.addEventListener('dragend',   onDragEnd);
     container.appendChild(li);
   });
 
   document.getElementById('goToPhase3').disabled = false;
+}
+
+// ── Phase 2: Drag & drop handlers ─────────────────────
+let dragSrcId = null;
+
+function onDragStart(e) {
+  dragSrcId = parseInt(this.dataset.id);
+  e.dataTransfer.effectAllowed = 'move';
+  setTimeout(() => this.classList.add('dragging'), 0);
+}
+
+function onDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  document.querySelectorAll('.rank-item').forEach(el => el.classList.remove('drag-over'));
+  this.classList.add('drag-over');
+}
+
+function onDragLeave() {
+  this.classList.remove('drag-over');
+}
+
+function onDrop(e) {
+  e.stopPropagation();
+  const tgtId = parseInt(this.dataset.id);
+  if (dragSrcId === tgtId) return;
+  const srcIdx = state.rankedValues.indexOf(dragSrcId);
+  const tgtIdx = state.rankedValues.indexOf(tgtId);
+  state.rankedValues.splice(srcIdx, 1);
+  state.rankedValues.splice(tgtIdx, 0, dragSrcId);
+  saveState();
+  renderPhase2();
+}
+
+function onDragEnd() {
+  document.querySelectorAll('.rank-item').forEach(el => {
+    el.classList.remove('dragging', 'drag-over');
+  });
 }
 
 function moveRanked(id, direction) {
@@ -416,7 +453,7 @@ function downloadPDF() {
   const checkY = (needed = 14) => { if (y + needed > 275) addPage(); };
 
   // Header
-  doc.setFillColor(6, 95, 70);
+  doc.setFillColor(55, 100, 240);
   doc.rect(0, 0, pageW, 30, 'F');
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(20);
@@ -439,7 +476,7 @@ function downloadPDF() {
   // Top 5
   doc.setFontSize(14);
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(6, 95, 70);
+  doc.setTextColor(55, 100, 240);
   doc.text('My Top 5 Values', margin, y);
   y += 8;
 
@@ -449,7 +486,7 @@ function downloadPDF() {
     checkY(16);
 
     // Number circle
-    doc.setFillColor(6, 95, 70);
+    doc.setFillColor(55, 100, 240);
     doc.circle(margin + 4, y - 1, 4, 'F');
     doc.setTextColor(255);
     doc.setFontSize(9);
@@ -516,9 +553,9 @@ function downloadPDF() {
   y += 8;
 
   const catConfig = [
-    { key: 'veryImportant', label: 'Very Important', r: 6, g: 95, b: 70 },
-    { key: 'important',     label: 'Important',       r: 37, g: 99, b: 235 },
-    { key: 'notImportant',  label: 'Not Important',   r: 107, g: 114, b: 128 }
+    { key: 'veryImportant', label: 'Very Important', r: 55,  g: 100, b: 240 },
+    { key: 'important',     label: 'Important',      r: 46,  g: 117, b: 182 },
+    { key: 'notImportant',  label: 'Not Important',  r: 107, g: 114, b: 128 }
   ];
 
   catConfig.forEach(({ key, label, r, g, b }) => {
