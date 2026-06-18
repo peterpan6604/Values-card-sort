@@ -436,11 +436,32 @@ function renderPhase3() {
 
 // ── PDF Download ───────────────────────────────────────
 
-function downloadPDF() {
+function loadImageAsBase64(src) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      canvas.getContext('2d').drawImage(img, 0, 0);
+      resolve(canvas.toDataURL('image/png'));
+    };
+    img.onerror = () => resolve(null);
+    img.src = src;
+  });
+}
+
+async function downloadPDF() {
   if (!window.jspdf) {
     showToast('PDF library not loaded. Please check your internet connection.');
     return;
   }
+
+  const [logoImg, straplineImg] = await Promise.all([
+    loadImageAsBase64('TeachFirst Brand toolkit/TF_Landscape_White.png'),
+    loadImageAsBase64('TeachFirst Brand toolkit/Rewrite_Landscape_White_CMYK.png')
+  ]);
 
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ unit: 'mm', format: 'a4' });
@@ -452,18 +473,27 @@ function downloadPDF() {
   const addPage = () => { doc.addPage(); y = 20; };
   const checkY = (needed = 14) => { if (y + needed > 275) addPage(); };
 
-  // Header
+  // Header bar
+  const headerH = 38;
   doc.setFillColor(55, 100, 240);
-  doc.rect(0, 0, pageW, 30, 'F');
-  doc.setTextColor(255, 255, 255);
-  doc.setFontSize(20);
-  doc.setFont('helvetica', 'bold');
-  doc.text('Values Card Sort', pageW / 2, 14, { align: 'center' });
-  doc.setFontSize(10);
-  doc.setFont('helvetica', 'normal');
-  doc.text('My Core Values', pageW / 2, 22, { align: 'center' });
+  doc.rect(0, 0, pageW, headerH, 'F');
 
-  y = 42;
+  // TF Landscape logo — left
+  if (logoImg) doc.addImage(logoImg, 'PNG', 6, 7, 44, 18);
+
+  // Title — centre
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(16);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Values Card Sort', pageW / 2, 17, { align: 'center' });
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'normal');
+  doc.text('My Core Values', pageW / 2, 24, { align: 'center' });
+
+  // Rewrite strapline — bottom right
+  if (straplineImg) doc.addImage(straplineImg, 'PNG', pageW - 56, headerH - 13, 50, 10);
+
+  y = headerH + 12;
   doc.setTextColor(0, 0, 0);
 
   // Date
