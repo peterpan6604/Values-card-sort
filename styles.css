@@ -88,6 +88,26 @@ body {
   text-align: center;
 }
 
+.header-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.header-logo {
+  height: 40px;
+  width: auto;
+}
+
+.header-strapline {
+  height: 28px;
+  width: auto;
+  opacity: 0.9;
+}
+
 .site-header h1 {
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 5vw, 2.25rem);
